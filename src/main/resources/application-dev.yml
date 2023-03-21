@@ -1,0 +1,22 @@
+server:
+  port: 7071
+  servlet:
+    context-path: /star-loyalty/v1.0.1
+  
+spring:
+  application:
+    name: STAR-LOYALTY-PROGRAM
+
+
+  datasource:
+     url: jdbc:oracle:thin:@//172.16.10.14:1521/orcl12
+     username: STARMPAY
+     password: STARMPAY
+     driver-class-name: oracle.jdbc.OracleDriver  
+        
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+    open-in-view: true
+    hibernate:
+       ddl-auto: update
+       
