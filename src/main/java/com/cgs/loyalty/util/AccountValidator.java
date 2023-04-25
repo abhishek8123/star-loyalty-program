@@ -34,21 +34,21 @@ public class AccountValidator {
 
 			List<ErrorDetails> errors = new ArrayList<>();
 
-			// Id
+			// Account Id
 			if (accId == false) {
-				ErrorDetails error = new ErrorDetails("Id", "Account id should have only 6 digits !!");
+				ErrorDetails error = new ErrorDetails("AccountId", "Account id should have only 6 digits !!");
 				errors.add(error);
 			}
 
-			// Id
+			// Customer Id
 			if (custId == false) {
-				ErrorDetails error = new ErrorDetails("Id", "customer id should have only 4 digits !!");
+				ErrorDetails error = new ErrorDetails("CustomerId", "customer id should have only 4 digits !!");
 				errors.add(error);
 			}
 
-			// Id
+			// Account No
 			if (accNo == false) {
-				ErrorDetails error = new ErrorDetails("Id", "Account no should have only 8 digits !!");
+				ErrorDetails error = new ErrorDetails("AccountNo", "Account no should have only 8 digits !!");
 				errors.add(error);
 			}
 			

@@ -43,7 +43,7 @@ public class CustomerLoyaltyAdvice extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(NullPointerException.class)
 	public ResponseEntity<String> handleNullPointerException(NullPointerException nullPointerException) {
 
-		return new ResponseEntity<String>("Input id Null ", HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<String>("Input is Null or Incurrect ", HttpStatus.BAD_REQUEST);
 
 	}
 

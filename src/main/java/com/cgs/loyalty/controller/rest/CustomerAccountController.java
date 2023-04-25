@@ -3,6 +3,7 @@ package com.cgs.loyalty.controller.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,7 @@ public class CustomerAccountController {
 	}
 
 	// delete account
-	// @DeleteMapping("/delete/{accountNo}")
+	@DeleteMapping("/delete/{accountNo}")
 	public ResponseEntity<String> deleteAccount(@PathVariable("accountNo") String accountNo){
 		log.info("In delete layalty customer account controller");
 		loyaltyAccountService.deleteByAccountNo(accountNo);
@@ -50,7 +51,7 @@ public class CustomerAccountController {
 	// get availabel points
 	@GetMapping("/checkPoints/{accountNumber}")
 	public ResponseEntity<String> checkAvailabelPoints(@PathVariable("accountNumber") String accountNumber) {
-		log.info("in get availabel points of loyalty customer controller");
+		log.info("in get available points of loyalty customer controller");
 		String points = loyaltyAccountService.checkPoints(accountNumber);
 		String msg = "Available points in Your account : " + points +" points";
 		return new ResponseEntity<String>(msg, HttpStatus.OK);

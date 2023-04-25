@@ -9,6 +9,7 @@ import com.cgs.loyalty.advice.ErrorDetails;
 import com.cgs.loyalty.dto.CustomerDto;
 import com.cgs.loyalty.entity.customer.LoyaltyCustomerDetails;
 import com.cgs.loyalty.exception.BadRequestException;
+import com.cgs.loyalty.exception.IdAlreadyExistException;
 import com.cgs.loyalty.repository.LoyaltyCustomerRepository;
 import com.cgs.loyalty.service.LoyaltyCustomerService;
 import com.cgs.loyalty.util.CustomerValidator;
@@ -32,13 +33,15 @@ public class LoyaltyCustomerServiceImp implements LoyaltyCustomerService {
 	@Override
 	public CustomerDto save(CustomerDto customerDto) {
 
-		log.info("In svae loyalty customer service");
+		log.info("In save loyalty customer service");
+		
+		if(customerValidator.checkIdExist(customerDto.getCustomerId())) {
+			throw new IdAlreadyExistException();
+		}
 		List<ErrorDetails> errors = customerValidator.validateToCreateCustomerRequest(customerDto);
-
 		if (errors.size() > 0) {
 			throw new BadRequestException(errors);
 		}
-
 		LoyaltyCustomerDetails customer = dtoToLoyCustomerDetails(customerDto);
 		LoyaltyCustomerDetails savedCustomer = customerLoyaltyRepository.save(customer);
 		return loyCustomerDetailsToDto(savedCustomer);
@@ -70,6 +73,12 @@ public class LoyaltyCustomerServiceImp implements LoyaltyCustomerService {
 		log.info("In update loyalty customer service");
 
 		LoyaltyCustomerDetails customer = customerValidator.checkCustomerPresentOrNot(customerDto);
+		
+		List<ErrorDetails> errors = customerValidator.validateToCreateCustomerRequest(customerDto);
+
+		if (errors.size() > 0) {
+			throw new BadRequestException(errors);
+		}
 
 		customer.setName(customerDto.getName());
 		customer.setMobileNo(customerDto.getMobileNo());
@@ -78,7 +87,7 @@ public class LoyaltyCustomerServiceImp implements LoyaltyCustomerService {
 		customer.setCustomerType(customerDto.getCustomerType());
 		customer.setRating(customerDto.getRating());
 		customer.setChannelOfRegistration(customerDto.getChannelOfRegistration());
-
+		
 		LoyaltyCustomerDetails customer1 = customerLoyaltyRepository.save(customer);
 		return loyCustomerDetailsToDto(customer1);
 	}

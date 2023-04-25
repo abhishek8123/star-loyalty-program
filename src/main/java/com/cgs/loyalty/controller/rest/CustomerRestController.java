@@ -34,7 +34,7 @@ public class CustomerRestController {
 	// Get All Customers by jpa
 	@GetMapping("/customers")
 	public ResponseEntity<List<CustomerDto>> getAllCustomer() {
-		log.info("In grt all loyalty customers controller");
+		log.info("In get all loyalty customers controller");
 		List<CustomerDto> savedCustomer = loyaltyCustomerService.getAllCustomer();
 		return new ResponseEntity<List<CustomerDto>>(savedCustomer, HttpStatus.FOUND);
 	}
